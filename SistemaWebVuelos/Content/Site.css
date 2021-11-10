@@ -1,0 +1,51 @@
+﻿body {
+
+}
+header {
+    background-color: black;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    height: 100px;
+    line-height: 109px;
+}
+
+nav ul {
+    display: flex;
+    justify-content:center;
+    background-color:cornflowerblue;
+}
+
+li {
+    margin-left: 15px;
+    list-style: none;
+    text-decoration: none;
+}
+
+li a {
+    line-height: 70px;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: aliceblue;
+}
+
+#izq {
+    background-color: black;
+    float: left;
+    width: 15%;
+    height: 600px;
+    color: white;
+    font-size:20px;
+}
+
+footer {
+    clear: both;
+    text-align: center;
+    height: 100px;
+    background-color: black;
+    color: white;
+    align-content:center;
+    line-height:100px;
+    font-size:22px;
+}
+

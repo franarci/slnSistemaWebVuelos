@@ -1,0 +1,46 @@
+﻿@model SistemaWebVuelos.Models.Vuelo
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Borrar Vuelo</title>
+</head>
+<body>
+    <h2>Borrar Vuelo</h2>
+    <p>Seguro que quiere borrar este vuelo?</p>
+
+    @using (Html.BeginForm("Delete", "Vuelo", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+        <fieldset>
+            <legend>Detalles del vuelo</legend>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </div>
+            <div class="display-text">
+                @Html.DisplayFor(model => model.Fecha)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Destino)
+            </div>
+            <div class="display-text">
+                @Html.DisplayFor(model => model.Destino)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Origen)
+            </div>
+            <div class="display-text">
+                @Html.DisplayFor(model => model.Origen)
+            </div>
+        </fieldset>
+
+            <input type="submit" value="Delete" />
+
+    }
+    <p>@Html.ActionLink("Volver", "Index", "Vuelo")</p>
+
+</body>
+</html>

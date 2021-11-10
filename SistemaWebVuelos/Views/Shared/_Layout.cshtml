@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>SISTEMA VUELOS</header>
+    <nav>
+        <ul>
+            <li><a href="http://localhost:57702/Home/Index">Home</a></li>
+            <li><a href="#">Vuelos</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="izq">
+            @if (IsSectionDefined("ZonaEditableOp"))
+            {
+                @RenderSection("ZonaEditableOp")
+            }
+            else
+            {
+                <p>Zona Editable Opcional</p>
+            }
+        </div>
+        <div id="content">
+            @RenderBody()
+        </div>
+        <footer><div id="email">Info@vuelo.com</div></footer>
+    </main>
+    
+</body>
+</html>

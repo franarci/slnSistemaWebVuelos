@@ -1,0 +1,27 @@
+﻿@model IEnumerable<SistemaWebVuelos.Models.Vuelo>
+
+
+<p>@Html.ActionLink("Create New", "Create", "Vuelo")</p>
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+        <th>@Html.DisplayNameFor(model => model.Destino)</th>
+        <th>@Html.DisplayNameFor(model => model.Origen)</th>
+        <th>@Html.DisplayNameFor(model => model.Matricula)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+            <td>@Html.ActionLink(item.Destino, "Index", new { destino= item.Destino})</td>
+            <td>@Html.DisplayFor(modelItem => item.Origen)</td>
+            <td>@Html.DisplayFor(modelItem => item.Matricula)</td>
+            <td>
+                @Html.ActionLink("Detail", "Detail", new { id = item.Id })
+            </td>
+            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
