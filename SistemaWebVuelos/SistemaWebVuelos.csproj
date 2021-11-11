@@ -99,10 +99,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdmVuelo.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VueloController.cs" />
     <Compile Include="Data\VueloDbContext.cs" />
+    <Compile Include="Data\VueloInitializer.cs" />
+    <Compile Include="Filter\BeforeAfterFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
