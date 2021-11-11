@@ -31,11 +31,18 @@ li a {
 
 #izq {
     background-color: black;
+    display:flex;
+    flex-direction:column;
     float: left;
-    width: 15%;
+    max-width: 347px;
     height: 600px;
     color: white;
-    font-size:20px;
+    font-size: 20px;
+}
+
+#izq img {
+    width:300px;
+    height:250px;
 }
 
 footer {
