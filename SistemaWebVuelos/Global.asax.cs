@@ -1,5 +1,7 @@
+using SistemaWebVuelos.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,7 @@ namespace SistemaWebVuelos
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<VueloDbContext>(new VueloInitializer());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
