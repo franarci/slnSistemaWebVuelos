@@ -1,4 +1,6 @@
-﻿using SistemaWebVuelos.Data;
+﻿using SistemaWebVuelos.Admin;
+using SistemaWebVuelos.Data;
+using SistemaWebVuelos.Filter;
 using SistemaWebVuelos.Models;
 using System;
 using System.Collections.Generic;
@@ -9,21 +11,20 @@ using System.Web.Mvc;
 
 namespace SistemaWebVuelos.Controllers
 {
+    [BeforeAfterFilter]
     public class VueloController : Controller
     {
-        static VueloDbContext context = new VueloDbContext();
+        //static VueloDbContext context = new VueloDbContext();
         // GET: Vuelo
         public ActionResult Index(string destino)
         {
             List<Vuelo> vuelos;
             if (string.IsNullOrEmpty(destino))
             {
-                 vuelos= context.Vuelos.ToList();
+                 vuelos= AdmVuelo.Listar();
             }
             else {
-                vuelos = (from v in context.Vuelos
-                          where v.Destino == destino
-                          select v).ToList();
+                vuelos = AdmVuelo.Listar(destino);
             }
             
             return View("Index", vuelos);
@@ -43,8 +44,7 @@ namespace SistemaWebVuelos.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Vuelos.Add(vuelo);
-                context.SaveChanges();
+                AdmVuelo.Insertar(vuelo);
                 return RedirectToAction("Index");
             }
             return View("Create", vuelo);
@@ -52,7 +52,7 @@ namespace SistemaWebVuelos.Controllers
 
         public ActionResult Detail(int id)
         {
-            Vuelo vuelo= context.Vuelos.Find(id);
+            Vuelo vuelo= AdmVuelo.BuscarPorId(id);
             if (vuelo != null)
             {
                 return View("Detail", vuelo);
@@ -62,7 +62,7 @@ namespace SistemaWebVuelos.Controllers
 
         public ActionResult Edit(int id)
         {
-            Vuelo vuelo = context.Vuelos.Find(id);
+            Vuelo vuelo = AdmVuelo.BuscarPorId(id);
             if (vuelo == null)
                 return HttpNotFound();
 
@@ -72,20 +72,15 @@ namespace SistemaWebVuelos.Controllers
         [HttpPost]
         public ActionResult Edit(Vuelo vuelo)
         {
-            var v = context.Vuelos.Find(vuelo.Id);
-            if (v != null)
-            {
-                context.Entry(v).State = EntityState.Detached;
-                context.Entry(vuelo).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View("Edit", vuelo);
+
+           AdmVuelo.Modificar(vuelo);
+
+           return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            Vuelo vuelo = context.Vuelos.Find(id);
+            Vuelo vuelo = AdmVuelo.BuscarPorId(id);
 
             if (vuelo != null)
             {
@@ -102,16 +97,14 @@ namespace SistemaWebVuelos.Controllers
         [ActionName("Delete")]
         public ActionResult DeleteConfirmed(Vuelo v)
         {
-            Vuelo vuelo = context.Vuelos.Find(v.Id);
+            Vuelo vuelo = AdmVuelo.BuscarPorId(v.Id);
+            
+            if (vuelo!=null)
             {
-                if (vuelo!=null)
-                {
-                   //context.Vuelos.Attach(vuelo);
-                   context.Vuelos.Remove(vuelo);
-                   context.SaveChanges();
-                }
-                return RedirectToAction("Index");
+                AdmVuelo.Eliminar(vuelo);
             }
+            return RedirectToAction("Index");
+            
         }
     }
 }
